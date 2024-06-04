@@ -4,10 +4,9 @@ FROM node:18-slim
 # Set the timezone to UTC to avoid time sync issues
 ENV TZ=UTC
 
-# Configure apt to use Tsinghua mirrors
-RUN echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm main contrib non-free" > /etc/apt/sources.list && \
-    echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm-updates main contrib non-free" >> /etc/apt/sources.list && \
-    echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian-security bookworm-security main contrib non-free" >> /etc/apt/sources.list
+# 设置中国的 APT 源
+RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list \
+    && sed -i 's/security.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list \
 
 # Install necessary dependencies for Puppeteer
 RUN apt-get update && apt-get install -y \
