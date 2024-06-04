@@ -10,12 +10,13 @@ RUN echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm main contrib
     echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian-security bookworm-security main contrib non-free" >> /etc/apt/sources.list
 
 # Install necessary dependencies for Puppeteer
-RUN apt-get update && apt-get install -y \
+RUN apt-get update --allow-unauthenticated && apt-get install -y \
     wget \
     gnupg \
     ca-certificates \
     tzdata \
     && rm -rf /var/lib/apt/lists/*
+
 
 
 # Install Chromium dependencies
@@ -36,8 +37,7 @@ RUN apt-get update && apt-get install -y \
     xdg-utils \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Puppeteer
-RUN npm install puppeteer
+
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -47,6 +47,9 @@ COPY . .
 
 # Expose the port the app runs on
 EXPOSE 3200
+
+# Install Puppeteer
+RUN npm install
 
 # Run the app
 CMD ["node", "server.js"]
