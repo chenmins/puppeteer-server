@@ -2,11 +2,15 @@
 # https://hub.docker.com/_/node
 FROM node:18-slim
 
+# Set the timezone to UTC to avoid time sync issues
+ENV TZ=UTC
+
 # Install necessary dependencies for Puppeteer
 RUN apt-get update && apt-get install -y \
     wget \
     gnupg \
     ca-certificates \
+    tzdata \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Chromium dependencies
