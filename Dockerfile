@@ -9,11 +9,6 @@ RUN echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm main contrib
     echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm-updates main contrib non-free" >> /etc/apt/sources.list && \
     echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian-security bookworm-security main contrib non-free" >> /etc/apt/sources.list
 
-# Download and trust the Tsinghua University CA certificate
-RUN apt-get update && apt-get install -y ca-certificates wget && \
-    wget --no-check-certificate -O /usr/local/share/ca-certificates/Tsinghua_University_CA.crt https://mirrors.tuna.tsinghua.edu.cn/debian-security/tsinghua_university_ca.crt && \
-    update-ca-certificates
-
 # Install necessary dependencies for Puppeteer
 RUN apt-get update && apt-get install -y \
     gnupg \
