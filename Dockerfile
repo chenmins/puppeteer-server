@@ -1,6 +1,6 @@
 # Use the official Node.js image.
 # https://hub.docker.com/_/node
-FROM node:16-slim
+FROM node:18-slim
 
 # Install necessary dependencies for Puppeteer
 RUN apt-get update && apt-get install -y \
