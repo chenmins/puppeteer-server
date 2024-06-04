@@ -9,7 +9,7 @@ RUN echo "deb http://mirrors.aliyun.com/debian/ bullseye main contrib non-free" 
     && echo "deb http://mirrors.aliyun.com/debian/ bullseye-updates main contrib non-free" >> /etc/apt/sources.list \
     && echo "deb http://mirrors.aliyun.com/debian/ bullseye-backports main contrib non-free" >> /etc/apt/sources.list \
     && echo "deb http://mirrors.aliyun.com/debian-security bullseye-security main contrib non-free" >> /etc/apt/sources.list
-    
+
 # Install necessary dependencies for Puppeteer
 RUN apt-get update && apt-get install -y \
     gnupg \
