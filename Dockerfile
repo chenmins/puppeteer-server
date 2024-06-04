@@ -29,7 +29,11 @@ RUN apt-get update && apt-get install -y \
     libgbm1 \
     xdg-utils \
     && rm -rf /var/lib/apt/lists/*
-
+# Install necessary dependencies for Puppeteer and Chinese fonts
+RUN apt-get update && apt-get install -y \
+    fonts-wqy-microhei \
+    fonts-wqy-zenhei \
+    && rm -rf /var/lib/apt/lists/*
 
 # Create app directory
 WORKDIR /usr/src/app
