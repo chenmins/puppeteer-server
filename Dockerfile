@@ -1,26 +1,23 @@
 # Use the official Node.js image.
-# https://hub.docker.com/_/node
 FROM node:18-slim
 
 # Set the timezone to UTC to avoid time sync issues
 ENV TZ=UTC
 
+# Configure apt to use Tsinghua mirrors
 RUN echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm main contrib non-free" > /etc/apt/sources.list && \
     echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm-updates main contrib non-free" >> /etc/apt/sources.list && \
     echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian-security bookworm-security main contrib non-free" >> /etc/apt/sources.list
 
+# Download and trust the Tsinghua University CA certificate
+RUN apt-get update && apt-get install -y ca-certificates wget && \
+    wget --no-check-certificate -O /usr/local/share/ca-certificates/Tsinghua_University_CA.crt https://mirrors.tuna.tsinghua.edu.cn/debian-security/tsinghua_university_ca.crt && \
+    update-ca-certificates
+
 # Install necessary dependencies for Puppeteer
-RUN apt-get update --allow-unauthenticated && apt-get install -y \
-    wget \
-    gnupg \
-    ca-certificates \
-    tzdata \
-    && rm -rf /var/lib/apt/lists/*
-
-
-
-# Install Chromium dependencies
 RUN apt-get update && apt-get install -y \
+    gnupg \
+    tzdata \
     libnss3 \
     libxss1 \
     libasound2 \
@@ -36,7 +33,6 @@ RUN apt-get update && apt-get install -y \
     libgbm1 \
     xdg-utils \
     && rm -rf /var/lib/apt/lists/*
-
 
 
 # Create app directory
