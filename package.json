@@ -1,0 +1,15 @@
+{
+  "name": "puppeteer-server",
+  "version": "1.0.0",
+  "description": "A simple Node.js server using Puppeteer to take screenshots and generate PDFs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "puppeteer": "^21.1.1"
+  },
+  "author": "Your Name",
+  "license": "MIT"
+}
