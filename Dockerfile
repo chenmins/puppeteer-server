@@ -37,7 +37,7 @@ WORKDIR /usr/src/app
 COPY . .
 
 # Expose the port the app runs on
-EXPOSE 3000
+EXPOSE 3200
 
 # Run the app
 CMD ["node", "server.js"]
