@@ -21,7 +21,8 @@ app.get('/screenshot', async (req, res) => {
         res.set('Content-Type', 'image/png');
         res.send(screenshot);
     } catch (error) {
-        res.status(500).send('Error taking screenshot');
+        res.status(500).send(`Error taking screenshot: ${error.message}`);
+
     }
 });
 
@@ -41,7 +42,8 @@ app.get('/pdf', async (req, res) => {
         res.set('Content-Type', 'application/pdf');
         res.send(pdf);
     } catch (error) {
-        res.status(500).send('Error generating PDF');
+        res.status(500).send(`Error generating PDF: ${error.message}`);
+
     }
 });
 
