@@ -5,6 +5,10 @@ FROM node:18-slim
 # Set the timezone to UTC to avoid time sync issues
 ENV TZ=UTC
 
+RUN echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm main contrib non-free" > /etc/apt/sources.list && \
+    echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm-updates main contrib non-free" >> /etc/apt/sources.list && \
+    echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian-security bookworm-security main contrib non-free" >> /etc/apt/sources.list
+
 # Install necessary dependencies for Puppeteer
 RUN apt-get update && apt-get install -y \
     wget \
@@ -12,6 +16,7 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     tzdata \
     && rm -rf /var/lib/apt/lists/*
+
 
 # Install Chromium dependencies
 RUN apt-get update && apt-get install -y \
