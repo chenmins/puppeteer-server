@@ -134,6 +134,72 @@ app.listen(port, () => {
 });
 ```
 
+在 Puppeteer 中，`page.pdf` 方法可以接受一个对象作为参数，其中的 `format` 属性可以指定生成 PDF 的纸张格式。除了 `A4` 之外，Puppeteer 支持以下纸张格式：
+
+- `Letter`
+- `Legal`
+- `Tabloid`
+- `Ledger`
+- `A0`
+- `A1`
+- `A2`
+- `A3`
+- `A4`
+- `A5`
+- `A6`
+
+以下是一个示例，展示了如何使用不同的纸张格式：
+
+```javascript
+const pdf = await page.pdf({ format: 'Letter' });
+```
+
+此外，你还可以通过指定宽度和高度来自定义纸张的尺寸。以下是一些示例：
+
+```javascript
+// 使用指定的宽度和高度
+const pdf = await page.pdf({ width: '8.5in', height: '11in' });
+
+// 使用指定的宽度和高度（厘米）
+const pdf = await page.pdf({ width: '21cm', height: '29.7cm' });
+
+// 使用指定的宽度和高度（像素）
+const pdf = await page.pdf({ width: '800px', height: '600px' });
+```
+
+完整的 `page.pdf` 方法参数列表如下：
+
+- `path` (string): 保存 PDF 文件的路径。如果没有指定，PDF 将作为 Buffer 返回。
+- `scale` (number): 缩放比例，默认是 1。
+- `displayHeaderFooter` (boolean): 是否显示页眉和页脚，默认是 `false`。
+- `headerTemplate` (string): 页眉的 HTML 模板。
+- `footerTemplate` (string): 页脚的 HTML 模板。
+- `printBackground` (boolean): 是否打印背景图形，默认是 `false`。
+- `landscape` (boolean): 是否横向打印，默认是 `false`。
+- `pageRanges` (string): 要打印的页面范围，例如 `'1-5'`，`'1, 3, 5'`。
+- `format` (string): 纸张格式，例如 `'A4'`，`'Letter'` 等。
+- `width` (string): 自定义纸张宽度。
+- `height` (string): 自定义纸张高度。
+- `margin` (object): 页边距，包括 `top`，`right`，`bottom` 和 `left`。
+- `preferCSSPageSize` (boolean): 是否优先使用 CSS 中的 `@page` 尺寸，默认是 `false`。
+
+示例如下：
+
+```javascript
+const pdf = await page.pdf({
+    format: 'A4',
+    printBackground: true,
+    margin: {
+        top: '1cm',
+        bottom: '1cm',
+        left: '1cm',
+        right: '1cm'
+    }
+});
+```
+
+这个示例将生成一个 A4 尺寸的 PDF，打印背景图形，并设置 1 厘米的页边距。
+
 ## 贡献指南
 
 欢迎任何形式的贡献！如果你有任何建议或发现了问题，请提交 issue 或创建 pull request。
